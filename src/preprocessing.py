@@ -38,9 +38,6 @@ from math import gcd
 
 warnings.filterwarnings("ignore")
 
-# ----------------------------------------------------------------------
-# Config
-# ----------------------------------------------------------------------
 TARGET_SR = 16000          # standard for speech/RIR analysis
 FRAME_MS = 30              # VAD / noise-floor analysis frame size
 SEGMENT_SEC = 2.0          # fixed-length segment for feature extraction
@@ -50,9 +47,6 @@ N_FFT = 512
 HOP_LENGTH = 160           # 10ms at 16kHz
 
 
-# ----------------------------------------------------------------------
-# 1. Audio ingestion & standardization
-# ----------------------------------------------------------------------
 def load_and_standardize(path, target_sr=TARGET_SR):
     """Load audio, force mono, resample to target_sr, return float32 in [-1, 1]."""
     audio, sr = sf.read(path, always_2d=True)  # shape: (n_samples, n_channels)
@@ -71,9 +65,6 @@ def load_and_standardize(path, target_sr=TARGET_SR):
     return audio, sr
 
 
-# ----------------------------------------------------------------------
-# 2. Signal cleaning
-# ----------------------------------------------------------------------
 def remove_dc_offset(audio):
     return audio - np.mean(audio)
 
@@ -105,9 +96,6 @@ def clean_signal(audio):
     return audio, {"clipping_fraction": float(clip_frac)}
 
 
-# ----------------------------------------------------------------------
-# 3. Voice Activity Detection (VAD) — simple energy-based, dependency-free
-# ----------------------------------------------------------------------
 def run_vad(audio, sr=TARGET_SR, top_db=30, frame_ms=FRAME_MS):
     """
     Energy-based VAD: computes short-time RMS energy per frame, converts to
@@ -158,9 +146,6 @@ def extract_speech_audio(audio, regions, sr=TARGET_SR, min_region_sec=0.3):
     return np.concatenate(chunks)
 
 
-# ----------------------------------------------------------------------
-# 4. Segmentation / framing
-# ----------------------------------------------------------------------
 def segment_audio(audio, sr=TARGET_SR, segment_sec=SEGMENT_SEC, overlap=0.5):
     """Split into fixed-length, tapered, overlapping segments."""
     seg_len = int(segment_sec * sr)
@@ -181,10 +166,6 @@ def segment_audio(audio, sr=TARGET_SR, segment_sec=SEGMENT_SEC, overlap=0.5):
 
     return np.stack(segments)  # shape: (n_segments, seg_len)
 
-
-# ----------------------------------------------------------------------
-# 5. Noise floor estimation
-# ----------------------------------------------------------------------
 def estimate_noise_floor(audio, sr=TARGET_SR, frame_ms=30):
     """
     Estimate noise floor using the lowest-energy percentile of frames
@@ -202,10 +183,6 @@ def estimate_noise_floor(audio, sr=TARGET_SR, frame_ms=30):
     noise_dbfs = 10 * np.log10(noise_energy + 1e-12)
     return float(noise_dbfs)
 
-
-# ----------------------------------------------------------------------
-# 6. RIR-relevant feature extraction
-# ----------------------------------------------------------------------
 def estimate_rt60(segment, sr=TARGET_SR):
     """
     Rough RT60 estimate via Schroeder backward-integration on the segment's
@@ -319,9 +296,6 @@ def extract_features_per_segment(segments, sr=TARGET_SR):
     return features
 
 
-# ----------------------------------------------------------------------
-# 7. Full pipeline
-# ----------------------------------------------------------------------
 def preprocess_file(path, sr=TARGET_SR, save_segments_dir=None):
     """Run the full preprocessing pipeline on a single audio file."""
     audio, sr = load_and_standardize(path, target_sr=sr)
@@ -380,9 +354,6 @@ def preprocess_directory(input_dir, output_dir, save_segments=False):
     return results
 
 
-# ----------------------------------------------------------------------
-# CLI
-# ----------------------------------------------------------------------
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AcousticSpace preprocessing pipeline")
     parser.add_argument("--input", required=True, help="Audio file or directory of audio files")
