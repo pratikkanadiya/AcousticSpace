@@ -49,23 +49,26 @@ is a React SPA that uploads a file, renders the waveform (wavesurfer.js), and di
 
 ```
 .
-├── model.py            # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
-├── dataset.py           # ASVspoofDataset — loads protocol + preprocessed segment reports
-├── train.py              # End-to-end training script (preprocess -> train -> checkpoint)
+├── model.py                # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
+├── dataset.py              # ASVspoofDataset — loads protocol + preprocessed segment reports
+├── train.py                # End-to-end training script (preprocess -> train -> checkpoint)
 ├── server/
-|   |── preprocess.py         # Audio -> spectrogram / room descriptor / acoustic feature extraction
+|   |── preprocess.py       # Audio -> spectrogram / room descriptor / acoustic feature extraction
 |   |── model.py            # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
-│   ├── main.py            # FastAPI app: /health, /analyze, /history endpoints
+│   ├── main.py             # FastAPI app: /health, /analyze, /history endpoints
 │   ├── inference.py        # AcousticSpaceModel — loads checkpoint, runs inference, repairs bad stats
 │   ├── database.py         # SQLite history storage (analysis_history table)
 │   ├── schemas.py          # Pydantic request/response models
-│   └── acousticspace.db     # SQLite database file
+│   ├── acousticspace.db    # SQLite database file
+|   ├── Dockerfile          # backend container configuration environment layout
 └── acousticspace-dashboard/
     ├── src/App.jsx          # Main UI: upload, waveform, verdict, metrics, history
     ├── src/main.jsx
     ├── src/index.css
     ├── vite.config.js
-    └── package.json
+    |── package.json
+    ├── Dockerfile
+
 ```
 
 ## Model Architecture
