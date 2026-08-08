@@ -12,3 +12,6 @@ model_weights/
 
 # Build files
 package-lock.json
+
+#Database
+server\acousticspace.db
