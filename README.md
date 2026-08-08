@@ -67,7 +67,7 @@ is a React SPA that uploads a file, renders the waveform (wavesurfer.js), and di
     ├── src/index.css
     ├── vite.config.js
     |── package.json
-    ├── Dockerfile
+    ├── Dockerfile           # Add frontend server container configuration asset layout
 
 ```
 
