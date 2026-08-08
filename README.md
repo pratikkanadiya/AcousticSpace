@@ -4,6 +4,21 @@ AcousticSpace is a deepfake / synthetic-speech detector that flags spoofed audio
 
 The idea: synthesized or replayed speech rarely reproduces a physically consistent room impulse response or natural breathing behavior, so a multi-modal model trained on ASVspoof-style data can catch what waveform-only detectors miss.
 
+### Classification
+
+The model performs binary classification:
+
+- **Bonafide (Real):** Naturally recorded human speech
+- **Spoof (Synthetic):** AI-generated or manipulated speech
+
+The final prediction combines three feature branches:
+
+1. **SpecBranch** – extracts vocal/spectral features from Log-Mel spectrograms.
+2. **RoomBranch** – analyzes room/acoustic characteristics.
+3. **AcousticBranch** – processes the 9 normalized acoustic features.
+4. **Fusion Classifier** – combines all three representations to produce the final prediction.
+
+> **Model Accuracy: 96%**
 
 # How it works
 
