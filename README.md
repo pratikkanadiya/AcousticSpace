@@ -18,7 +18,9 @@ The final prediction combines three feature branches:
 3. **AcousticBranch** – processes the 9 normalized acoustic features.
 4. **Fusion Classifier** – combines all three representations to produce the final prediction.
 
-> **Model Accuracy: 96%**
+```
+Model Accuracy: 96%
+```
 
 # How it works
 
