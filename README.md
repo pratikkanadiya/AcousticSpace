@@ -49,7 +49,6 @@ is a React SPA that uploads a file, renders the waveform (wavesurfer.js), and di
 
 ```
 .
-├── model.py                # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
 ├── dataset.py              # ASVspoofDataset — loads protocol + preprocessed segment reports
 ├── train.py                # End-to-end training script (preprocess -> train -> checkpoint)
 ├── server/
@@ -60,6 +59,7 @@ is a React SPA that uploads a file, renders the waveform (wavesurfer.js), and di
 │   ├── database.py         # SQLite history storage (analysis_history table)
 │   ├── schemas.py          # Pydantic request/response models
 │   ├── acousticspace.db    # SQLite database file
+|   ├── requirements.txt    # All dependencies which require for preprocessing, model and backend
 |   ├── Dockerfile          # backend container configuration environment layout
 └── acousticspace-dashboard/
     ├── src/App.jsx          # Main UI: upload, waveform, verdict, metrics, history
