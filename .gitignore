@@ -1,0 +1,14 @@
+# Python
+**/__pycache__/
+
+# Environments and Data
+.myenv/
+
+#Data
+data/
+
+#model weights
+model_weights/
+
+# Build files
+package-lock.json
