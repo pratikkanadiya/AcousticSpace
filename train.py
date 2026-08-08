@@ -8,9 +8,9 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
-from preprocess import audio_to_spectrogram
+from server.preprocess import audio_to_spectrogram
 from dataset import ASVspoofDataset
-from model import MultiModalAcousticNet
+from server.model import MultiModalAcousticNet
 
 SEED = 42
 

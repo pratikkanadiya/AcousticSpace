@@ -21,7 +21,7 @@ jobs:
     - name: Build and Push Backend Image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./server
         file: ./server/Dockerfile
         push: true
         tags: pratikkanadiya/acoustic-backend:latest,pratikkanadiya/acoustic-backend:v1
@@ -33,4 +33,3 @@ jobs:
         file: ./acousticspace-dashboard/Dockerfile
         push: true
         tags: pratikkanadiya/acoustic-frontend:latest,pratikkanadiya/acoustic-frontend:v1
-
