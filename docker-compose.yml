@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    image: pratikkanadiya/acoustic-backend:v1
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+      - /app/__pycache__
+    environment:
+      - ENV=development
+
+  frontend:
+    image: pratikkanadiya/acoustic-frontend:v1
+    build:
+      context: ./acousticspace-dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./acousticspace-dashboard:/app
+      - /app/node_modules
+    depends_on:
+      - backend
