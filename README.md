@@ -130,10 +130,10 @@ The three branch outputs (512 + 128 + 32 = 672) are concatenated and passed thro
 
 ## Fast API Endpoints
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Method   | Path       | Description                                                                                                                         |
-|----------|------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `GET`    | `/health`  | Returns model load status and device information. |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Method   | Path       | Description                                                                                                                          |
+|----------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `GET`    | `/health`  | Returns model load status and device information.                                                                                    |
 | `POST`   | `/analyze` | Upload an audio file (`.wav`, `.flac`, `.mp3`, `.ogg`, `.m4a`, ≤ 50 MB). Returns verdict, confidence, spoof probability, per-segment predictions, and acoustic summary.                                                                                                                             |
 | `GET`    | `/history` | Lists past audio analyses stored in SQLite.                                                                                          |
 | `DELETE` | `/history/{id}` | Deletes a specific history entry by ID.                                                                                         |
@@ -172,11 +172,11 @@ The frontend container hosts the client-side visual dashboard asset compilation 
 
 # Project Development Timeline
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Week       | Tasks                                                                                                                                               |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Week 1** | Find and select the dataset; build the audio preprocessing pipeline.                                                                                |
-| **Week 2** | Assign labels and standardize the dataset; build the deep learning model; develop the training pipeline.                                            |
-| **Week 3** | Preprocess the complete dataset (~50K audio files); train the CNN model on the processed data                                                       |
-| **Week 4** | build the React dashboard, Create the FastAPI backend; test the model on various audio files; Dockerize the complete AcousticSpace application.     |
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Week         | Tasks                                                                                                                                               |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Week 1**   | Find and select the dataset; build the audio preprocessing pipeline.                                                                                |
+| **Week 2**   | Assign labels and standardize the dataset; build the deep learning model; develop the training pipeline.                                            |
+| **Week 3**   | Preprocess the complete dataset (~50K audio files); train the CNN model on the processed data                                                       |
+| **Week 4**   | build the React dashboard, Create the FastAPI backend; test the model on various audio files; Dockerize the complete AcousticSpace application.     |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
