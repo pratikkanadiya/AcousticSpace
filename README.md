@@ -51,9 +51,10 @@ is a React SPA that uploads a file, renders the waveform (wavesurfer.js), and di
 .
 ├── model.py            # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
 ├── dataset.py           # ASVspoofDataset — loads protocol + preprocessed segment reports
-├── preprocess.py         # Audio -> spectrogram / room descriptor / acoustic feature extraction
 ├── train.py              # End-to-end training script (preprocess -> train -> checkpoint)
 ├── server/
+|   |── preprocess.py         # Audio -> spectrogram / room descriptor / acoustic feature extraction
+|   |── model.py            # MultiModalAcousticNet (spec CNN + room CNN + acoustic MLP + classifier head)
 │   ├── main.py            # FastAPI app: /health, /analyze, /history endpoints
 │   ├── inference.py        # AcousticSpaceModel — loads checkpoint, runs inference, repairs bad stats
 │   ├── database.py         # SQLite history storage (analysis_history table)
